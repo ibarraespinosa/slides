@@ -56,6 +56,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 slideEl.innerHTML = finalHTML;
                 container.appendChild(slideEl);
+                // --- NEW: Trigger MathJax to render equations on this slide ---
+                if (window.MathJax) {
+                    MathJax.typesetPromise([slideEl]);
+                }
             } catch (e) {
                 console.error(`Error loading slide ${slidesData[i]}`, e);
             }
