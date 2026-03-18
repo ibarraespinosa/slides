@@ -230,3 +230,24 @@ li { margin-bottom: 0.5rem; }
     width: 0%; 
     transition: width 0.4s ease; 
 }
+
+/* --- Logo Styling --- */
+.logo-container {
+    display: flex;
+    justify-content: center; /* Centers the logos horizontally */
+    gap: 2rem; /* Adds space between the logos */
+    margin-bottom: 2rem; /* Adds space below the logos before the main title */
+    width: 100%;
+}
+
+.slide-logo {
+    max-height: 50px; /* Limits the height so they stay small and elegant */
+    width: auto; /* Maintains aspect ratio */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* Adds a subtle shadow for depth */
+    opacity: 0.8; /* Makes them slightly subtle against the background */
+    transition: opacity 0.3s ease;
+}
+
+.slide-logo:hover {
+    opacity: 1; /* Brightens them on hover */
+}
