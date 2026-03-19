@@ -56,6 +56,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 slideEl.innerHTML = finalHTML;
                 container.appendChild(slideEl);
+
+                // --- NEW: Navigation Dot ---
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.addEventListener('click', () => {
+                    currentSlide = i;
+                    updateSlides();
+                });
+                document.getElementById('nav-dots').appendChild(dot);
+
                 // --- NEW: Trigger MathJax to render equations on this slide ---
                 if (window.MathJax) {
                     MathJax.typesetPromise([slideEl]);
@@ -70,6 +80,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- 3. NAVIGATION LOGIC ---
     function updateSlides() {
         const slides = document.querySelectorAll('.slide');
+        if (slides.length === 0) return;
+        
         slides.forEach((slide, index) => {
             slide.classList.remove('active');
             if (index === currentSlide) {
@@ -79,19 +91,63 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         });
+
+        const dots = document.querySelectorAll('.nav-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+
         progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
     }
 
-    window.addEventListener('keydown', (e) => {
+    function goToNextSlide() {
         const slides = document.querySelectorAll('.slide');
-        if (e.key === 'ArrowRight' || e.key === 'Space') {
-            if (currentSlide < slides.length - 1) currentSlide++;
-            updateSlides();
-        } else if (e.key === 'ArrowLeft') {
-            if (currentSlide > 0) currentSlide--;
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
             updateSlides();
         }
+    }
+
+    function goToPrevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlides();
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
+            goToNextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            goToPrevSlide();
+        }
     });
+
+    // Mobile Swipe Support
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    window.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        
+        const dx = touchEndX - touchStartX;
+        const dy = touchEndY - touchStartY;
+        
+        // Only trigger if movement is primarily horizontal and exceeds threshold
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) {
+                goToNextSlide(); // Swipe left -> forward
+            } else {
+                goToPrevSlide(); // Swipe right -> back
+            }
+        }
+    }, { passive: true });
 
     // --- 4. CINEMATIC BACKGROUND ENGINE ---
     const canvas = document.getElementById('bg-canvas');
