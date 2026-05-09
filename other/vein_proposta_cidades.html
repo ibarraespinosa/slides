@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VEIN — Gestão da Qualidade do Ar para Cidades</title>
+<title>VEIN — Inventários de Emissões para Cidades</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: #0a0a0f;
+  background: #07070d;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #e2e8f0;
   display: flex;
@@ -17,146 +17,177 @@ body {
   padding: 40px 20px;
 }
 
+/* ---- SLIDE ---- */
 .slide {
   width: 1200px;
   height: 675px;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  border-radius: 24px;
   position: relative;
   overflow: hidden;
   margin-bottom: 40px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-  border: 1px solid rgba(99,102,241,0.15);
+  border-radius: 24px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(99,102,241,0.1);
 }
 
+/* Gradient background variants */
+.slide-bg-1 { background: linear-gradient(160deg, #0c0a1a 0%, #111827 40%, #0f172a 70%, #0a0a1a 100%); }
+.slide-bg-2 { background: linear-gradient(160deg, #0a0a1a 0%, #0f172a 30%, #111827 60%, #0c0a1a 100%); }
+.slide-bg-3 { background: linear-gradient(160deg, #0a0f1a 0%, #0f172a 35%, #0c1a1a 65%, #0a0a1a 100%); }
+.slide-bg-4 { background: linear-gradient(160deg, #0c0a1a 0%, #111827 40%, #0a1720 70%, #0a0a0f 100%); }
+
+/* Grid overlay */
 .slide::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(99,102,241,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.025) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
+  z-index: 1;
 }
 
-.glow-1 {
+/* Glow orbs */
+.glow-top-right {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 550px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99,102,241,0.08), transparent 70%);
-  top: -150px;
-  right: -150px;
+  background: radial-gradient(circle, rgba(99,102,241,0.07), transparent 70%);
+  top: -200px;
+  right: -180px;
   pointer-events: none;
+  z-index: 0;
 }
-.glow-2 {
+.glow-bottom-left {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52,211,153,0.05), transparent 70%);
+  bottom: -150px;
+  left: -120px;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-mid {
   position: absolute;
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(52,211,153,0.06), transparent 70%);
-  bottom: -100px;
+  background: radial-gradient(circle, rgba(99,102,241,0.04), transparent 70%);
+  top: 40%;
   left: -100px;
   pointer-events: none;
+  z-index: 0;
 }
 
+/* Content wrapper */
 .slide-content {
   position: relative;
-  z-index: 1;
-  padding: 50px 60px;
+  z-index: 2;
+  padding: 35px 55px;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.hero-header {
+/* ---- HEADER BAR ---- */
+.slide-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
-.hero-logo {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #6366f1, #34d399);
-  border-radius: 12px;
+.header-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: 'Courier New', monospace;
-  font-weight: 700;
-  font-size: 20px;
-  color: white;
+  gap: 14px;
 }
-.hero-title {
-  font-size: 14px;
+.header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+.header-tagline {
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   color: #6366f1;
   font-weight: 600;
 }
-.hero-badge {
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(99,102,241,0.3);
+.header-badge {
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.2);
   padding: 4px 14px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
   color: #a5b4fc;
+  font-weight: 500;
 }
 
+/* ---- HEADLINES ---- */
 .main-headline {
-  font-size: 48px;
+  font-size: 44px;
   font-weight: 800;
   line-height: 1.1;
-  margin-top: 8px;
-  background: linear-gradient(135deg, #e2e8f0 0%, #a5b4fc 50%, #34d399 100%);
+  background: linear-gradient(135deg, #f1f5f9 0%, #a5b4fc 40%, #34d399 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.main-headline.smaller {
+  font-size: 34px;
+}
 .subheadline {
-  font-size: 18px;
-  color: #94a3b8;
+  font-size: 16px;
+  color: #64748b;
   font-weight: 300;
-  margin-top: 10px;
-  max-width: 700px;
-  line-height: 1.5;
+  margin-top: 8px;
+  max-width: 680px;
+  line-height: 1.6;
 }
 
-/* Slide 1 stats */
+/* ---- STATS GRID (Slide 1) ---- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 18px;
   margin-top: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .stat-card {
-  background: rgba(15,23,42,0.6);
-  border: 1px solid rgba(99,102,241,0.15);
-  border-radius: 16px;
-  padding: 28px 24px;
+  background: rgba(15,23,42,0.5);
+  border: 1px solid rgba(99,102,241,0.1);
+  border-radius: 14px;
+  padding: 24px 20px;
   text-align: center;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.stat-card:hover {
+  border-color: rgba(99,102,241,0.3);
+  transform: translateY(-2px);
 }
 .stat-number {
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 800;
   background: linear-gradient(135deg, #6366f1, #34d399);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-family: 'Courier New', monospace;
+  line-height: 1;
 }
-.stat-number.cyan {
-  background: linear-gradient(135deg, #06b6d4, #6366f1);
+.stat-number.amber {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.stat-number.amber {
-  background: linear-gradient(135deg, #f59e0b, #f97316);
+.stat-number.cyan {
+  background: linear-gradient(135deg, #06b6d4, #6366f1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -168,166 +199,268 @@ body {
   background-clip: text;
 }
 .stat-label {
-  font-size: 13px;
+  font-size: 12px;
   color: #64748b;
   margin-top: 8px;
   font-weight: 500;
+  letter-spacing: 0.2px;
 }
 .stat-sublabel {
-  font-size: 11px;
-  color: #475569;
-  margin-top: 4px;
-}
-
-/* Slide 2 pipeline */
-.pipeline-block {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-  flex: 1;
-  margin-top: 20px;
-}
-.pipeline-card {
-  background: rgba(15,23,42,0.5);
-  border: 1px solid rgba(99,102,241,0.12);
-  border-radius: 16px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-}
-.pipeline-card.highlight {
-  border-color: rgba(52,211,153,0.3);
-  background: rgba(15,23,42,0.6);
-}
-.card-phase {
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #6366f1;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-.card-phase.green { color: #34d399; }
-.card-phase.amber { color: #f59e0b; }
-.card-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin-bottom: 8px;
-}
-.card-desc {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.6;
-  flex: 1;
-}
-.card-items {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.card-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: #94a3b8;
-  padding: 6px 10px;
-  background: rgba(30,41,59,0.3);
-  border-radius: 6px;
-}
-.card-item-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.card-item-dot.blue { background: #6366f1; }
-.card-item-dot.green { background: #34d399; }
-.card-item-dot.amber { background: #f59e0b; }
-.card-item-dot.cyan { background: #06b6d4; }
-.card-item-dot.purple { background: #a78bfa; }
-.card-item-dot.pink { background: #ec4899; }
-
-/* Slide 3 benefits */
-.benefits-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  flex: 1;
-  margin-top: 20px;
-}
-.benefit-card {
-  background: rgba(15,23,42,0.5);
-  border: 1px solid rgba(99,102,241,0.12);
-  border-radius: 16px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-}
-.benefit-icon-big {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-.benefit-icon-big.blue { background: rgba(99,102,241,0.15); }
-.benefit-icon-big.green { background: rgba(52,211,153,0.15); }
-.benefit-icon-big.amber { background: rgba(245,158,11,0.15); }
-.benefit-icon-big.cyan { background: rgba(6,182,212,0.15); }
-.benefit-icon-big.purple { background: rgba(167,139,250,0.15); }
-.benefit-icon-big.pink { background: rgba(236,72,153,0.15); }
-.benefit-title-card {
-  font-size: 18px;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin-bottom: 8px;
-}
-.benefit-desc-card {
-  font-size: 13px;
-  color: #64748b;
-  line-height: 1.6;
-  flex: 1;
-}
-.benefit-metric {
-  margin-top: 12px;
-  padding: 10px 14px;
-  background: rgba(30,41,59,0.3);
-  border-radius: 8px;
-  font-size: 12px;
-  color: #a5b4fc;
-  border-left: 3px solid #6366f1;
+  color: #475569;
+  margin-top: 3px;
 }
 
-/* Footer */
+/* ---- FOOTER ---- */
 .slide-footer {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid rgba(99,102,241,0.1);
+  padding-top: 14px;
+  border-top: 1px solid rgba(99,102,241,0.07);
 }
 .footer-left {
-  font-size: 12px;
+  font-size: 11px;
   color: #475569;
   font-family: 'Courier New', monospace;
 }
 .footer-right {
   display: flex;
-  gap: 20px;
-  font-size: 12px;
+  gap: 24px;
+  font-size: 11px;
   color: #475569;
 }
 .page-indicator {
   font-family: 'Courier New', monospace;
   color: #6366f1;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---- GIF BACKGROUND on slide 1 ---- */
+.gif-bg {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 600px;
+  height: auto;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  object-fit: contain;
+}
+
+/* ---- PIPELINE (Slide 2) ---- */
+.pipeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  margin-top: 12px;
+}
+.pipeline-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+.pipeline-row + .pipeline-row {
+  margin-top: 14px;
+}
+.pipe-card {
+  background: rgba(15,23,42,0.45);
+  border: 1px solid rgba(99,102,241,0.08);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+.pipe-card:hover {
+  border-color: rgba(99,102,241,0.25);
+}
+.pipe-card.highlight {
+  border-color: rgba(52,211,153,0.2);
+  background: rgba(15,23,42,0.55);
+}
+.pipe-phase {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.pipe-phase.purple { color: #6366f1; }
+.pipe-phase.green { color: #34d399; }
+.pipe-phase.amber { color: #f59e0b; }
+.pipe-phase.cyan { color: #06b6d4; }
+.pipe-phase.pink { color: #ec4899; }
+.pipe-phase.orange { color: #f97316; }
+
+.pipe-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 6px;
+}
+.pipe-desc {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.5;
+  flex: 1;
+}
+.pipe-items {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pipe-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #94a3b8;
+  padding: 5px 10px;
+  background: rgba(30,41,59,0.3);
+  border-radius: 6px;
+}
+.pipe-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pipe-dot.purple { background: #6366f1; }
+.pipe-dot.green { background: #34d399; }
+.pipe-dot.amber { background: #f59e0b; }
+.pipe-dot.cyan { background: #06b6d4; }
+.pipe-dot.pink { background: #ec4899; }
+.pipe-dot.orange { background: #f97316; }
+
+/* ---- BENEFITS (Slide 3) ---- */
+.benefits-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  margin-top: 14px;
+}
+.benefit-card {
+  background: rgba(15,23,42,0.45);
+  border: 1px solid rgba(99,102,241,0.08);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+.benefit-card:hover {
+  border-color: rgba(99,102,241,0.25);
+}
+.benefit-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.benefit-icon-box.blue { background: rgba(99,102,241,0.12); }
+.benefit-icon-box.green { background: rgba(52,211,153,0.12); }
+.benefit-icon-box.amber { background: rgba(245,158,11,0.12); }
+.benefit-icon-box.cyan { background: rgba(6,182,212,0.12); }
+.benefit-icon-box.purple { background: rgba(167,139,250,0.12); }
+.benefit-icon-box.pink { background: rgba(236,72,153,0.12); }
+
+.benefit-title-card {
+  font-size: 17px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 6px;
+}
+.benefit-desc-card {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.6;
+  flex: 1;
+}
+.benefit-footer {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(30,41,59,0.3);
+  border-radius: 8px;
+  font-size: 11px;
+  color: #a5b4fc;
+  border-left: 3px solid #6366f1;
+}
+
+/* ---- PUBLICATIONS (Slide 4) ---- */
+.pub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  flex: 1;
+  margin-top: 10px;
+  overflow-y: auto;
+}
+.pub-entry {
+  background: rgba(15,23,42,0.4);
+  border: 1px solid rgba(99,102,241,0.06);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+.pub-entry:hover {
+  border-color: rgba(99,102,241,0.2);
+}
+.pub-num {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #6366f1;
+  font-weight: 700;
+  line-height: 1.4;
+  min-width: 28px;
+  padding-top: 1px;
+}
+.pub-body {
+  flex: 1;
+  min-width: 0;
+}
+.pub-venue {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #34d399;
+  font-weight: 600;
+}
+.pub-title {
+  font-size: 12px;
+  color: #e2e8f0;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-top: 2px;
+}
+.pub-authors {
+  font-size: 10px;
+  color: #475569;
+  margin-top: 2px;
+}
+
+/* ---- SCROLLBAR ---- */
+.pub-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.pub-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.pub-grid::-webkit-scrollbar-thumb {
+  background: rgba(99,102,241,0.3);
+  border-radius: 2px;
 }
 
 @media (max-width: 1240px) {
@@ -337,36 +470,44 @@ body {
 </head>
 <body>
 
-<!-- ====== SLIDE 1: O QUE É / CREDIBILIDADE ====== -->
-<div class="slide">
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
+<!-- ================================================================ -->
+<!-- SLIDE 1 — HERO + CREDIBILIDADE -->
+<!-- ================================================================ -->
+<div class="slide slide-bg-1">
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+
+  <img class="gif-bg" src="https://user-images.githubusercontent.com/27447280/234115392-b1c891ff-474d-40a3-b9a7-e816ded9bc70.gif" alt="">
+
   <div class="slide-content">
-    <div class="hero-header">
-      <div class="hero-logo">V</div>
-      <span class="hero-title">VEIN para Cidades</span>
-      <span class="hero-badge">Proposta</span>
+    <div class="slide-header">
+      <div class="header-left">
+        <img class="header-logo" src="https://github.com/atmoschem/vein/raw/master/man/figures/logo.png" alt="VEIN">
+        <span class="header-tagline">Inventários Veiculares</span>
+      </div>
+      <span class="header-badge">Solução para Cidades</span>
     </div>
 
     <div class="main-headline">
-      Inventários de Emissões Veiculares<br>
-      para Gestão Municipal da Qualidade do Ar
+      Inventários de Emissões<br>
+      para Gestão Municipal<br>
+      da Qualidade do Ar
     </div>
     <div class="subheadline">
-      Metodologia científica, open-source, validada internacionalmente —<br>
-      adaptada à realidade da frota e dos combustíveis brasileiros.
+      Metodologia científica validada internacionalmente — adaptada à realidade<br>
+      da frota e dos combustíveis brasileiros. Dados abertos. Reproduzível.
     </div>
 
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-number">56K+</div>
-        <div class="stat-label">Downloads do VEIN</div>
-        <div class="stat-sublabel">Pacote R no CRAN · Crescimento contínuo</div>
+        <div class="stat-label">Downloads no CRAN</div>
+        <div class="stat-sublabel">Crescimento contínuo desde 2018</div>
       </div>
       <div class="stat-card">
         <div class="stat-number cyan">15+</div>
         <div class="stat-label">Países com Aplicações</div>
-        <div class="stat-sublabel">Brasil, China, EUA, Equador, Chile, Colômbia...</div>
+        <div class="stat-sublabel">Brasil, China, EUA, Equador, Chile...</div>
       </div>
       <div class="stat-card">
         <div class="stat-number amber">50+</div>
@@ -383,93 +524,100 @@ body {
     <div class="slide-footer">
       <div class="footer-left">github.com/atmoschem/vein</div>
       <div class="footer-right">
-        <span>Metodologia GMD 2018</span>
+        <span>Metodologia: GMD 2018</span>
         <span>DOI: 10.5194/gmd-11-2209-2018</span>
-        <span class="page-indicator">01 / 03</span>
+        <span class="page-indicator">01 / 04</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ====== SLIDE 2: METODOLOGIA / PROCEDIMENTO ====== -->
-<div class="slide">
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
+<!-- ================================================================ -->
+<!-- SLIDE 2 — PROCEDIMENTO -->
+<!-- ================================================================ -->
+<div class="slide slide-bg-2">
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+
   <div class="slide-content">
-    <div class="hero-header">
-      <div class="hero-logo">V</div>
-      <span class="hero-title">Procedimento</span>
-      <span class="hero-badge">Fluxo de Trabalho</span>
+    <div class="slide-header">
+      <div class="header-left">
+        <img class="header-logo" src="https://github.com/atmoschem/vein/raw/master/man/figures/logo.png" alt="VEIN">
+        <span class="header-tagline">Procedimento</span>
+      </div>
+      <span class="header-badge">6 Fases</span>
     </div>
 
-    <div class="main-headline" style="font-size:36px; margin-top:0;">
-      Seis etapas para um inventário municipal completo
+    <div class="main-headline smaller">
+      Fluxo de trabalho para inventário municipal completo
     </div>
 
-    <div class="pipeline-block">
-      <div class="pipeline-card">
-        <div class="card-phase">Fase 1</div>
-        <div class="card-title">Dados de Atividade</div>
-        <div class="card-desc">Levantamento da frota circulante, contagens de tráfego, dados GPS, modelos de demanda de viagens, pesquisas origem-destino.</div>
-        <div class="card-items">
-          <div class="card-item"><div class="card-item-dot blue"></div> Frota por tipo/ano/combustível</div>
-          <div class="card-item"><div class="card-item-dot blue"></div> Contagens volumétricas</div>
-          <div class="card-item"><div class="card-item-dot blue"></div> Dados de quilometragem</div>
+    <div class="pipeline-wrapper">
+      <div class="pipeline-row">
+        <div class="pipe-card">
+          <div class="pipe-phase purple">Fase 1</div>
+          <div class="pipe-title">Dados de Atividade</div>
+          <div class="pipe-desc">Frota circulante, contagens de tráfego, dados GPS, pesquisas origem-destino, quilometragem.</div>
+          <div class="pipe-items">
+            <div class="pipe-item"><div class="pipe-dot purple"></div> Frota por tipo/ano/combustível</div>
+            <div class="pipe-item"><div class="pipe-dot purple"></div> Contagens volumétricas</div>
+            <div class="pipe-item"><div class="pipe-dot purple"></div> Quilometragem percorrida</div>
+          </div>
+        </div>
+
+        <div class="pipe-card highlight">
+          <div class="pipe-phase green">Fase 2</div>
+          <div class="pipe-title">Fatores de Emissão</div>
+          <div class="pipe-desc">Fatores validados para a realidade brasileira — etanol, biodiesel, flex-fuel, gasolina.</div>
+          <div class="pipe-items">
+            <div class="pipe-item"><div class="pipe-dot green"></div> CETESB · Inspeção veicular</div>
+            <div class="pipe-item"><div class="pipe-dot green"></div> Evaporativas + partida fria</div>
+            <div class="pipe-item"><div class="pipe-dot green"></div> CO, NOx, HC, PM, CO₂</div>
+          </div>
+        </div>
+
+        <div class="pipe-card">
+          <div class="pipe-phase amber">Fase 3</div>
+          <div class="pipe-title">Espacialização</div>
+          <div class="pipe-desc">Distribuição geográfica com resolução de via e perfis horários de tráfego.</div>
+          <div class="pipe-items">
+            <div class="pipe-item"><div class="pipe-dot amber"></div> Emissões por rua</div>
+            <div class="pipe-item"><div class="pipe-dot amber"></div> Perfis diários/semanais</div>
+            <div class="pipe-item"><div class="pipe-dot amber"></div> Mapas de calor</div>
+          </div>
         </div>
       </div>
 
-      <div class="pipeline-card highlight">
-        <div class="card-phase green">Fase 2</div>
-        <div class="card-title">Fatores de Emissão</div>
-        <div class="card-desc">Aplicação de fatores validados para a realidade brasileira — etanol, biodiesel, flex-fuel. Fontes: CETESB, dados de inspeção veicular, literatura.</div>
-        <div class="card-items">
-          <div class="card-item"><div class="card-item-dot green"></div> Poluentes: CO, NOx, HC, PM, CO₂</div>
-          <div class="card-item"><div class="card-item-dot green"></div> Evaporativas + escape</div>
-          <div class="card-item"><div class="card-item-dot green"></div> Partida fria</div>
+      <div class="pipeline-row">
+        <div class="pipe-card">
+          <div class="pipe-phase cyan">Fase 4</div>
+          <div class="pipe-title">Validação</div>
+          <div class="pipe-desc">Comparação com dados de qualidade do ar, campanhas de túnel, estudos anteriores.</div>
+          <div class="pipe-items">
+            <div class="pipe-item"><div class="pipe-dot cyan"></div> Dados de estações</div>
+            <div class="pipe-item"><div class="pipe-dot cyan"></div> Benchmarking</div>
+            <div class="pipe-item"><div class="pipe-dot cyan"></div> Ajuste iterativo</div>
+          </div>
         </div>
-      </div>
 
-      <div class="pipeline-card">
-        <div class="card-phase amber">Fase 3</div>
-        <div class="card-title">Espacialização</div>
-        <div class="card-desc">Distribuição geográfica das emissões com resolução de via — perfis horários de tráfego, dados de GPS, malha viária municipal.</div>
-        <div class="card-items">
-          <div class="card-item"><div class="card-item-dot amber"></div> Emissões por rua</div>
-          <div class="card-item"><div class="card-item-dot amber"></div> Perfis diários/semanais</div>
-          <div class="card-item"><div class="card-item-dot amber"></div> Mapas de calor de poluentes</div>
+        <div class="pipe-card">
+          <div class="pipe-phase pink">Fase 5</div>
+          <div class="pipe-title">Modelagem</div>
+          <div class="pipe-desc">Exportação para modelos de qualidade do ar via eixport e EmissV.</div>
+          <div class="pipe-items">
+            <div class="pipe-item"><div class="pipe-dot pink"></div> WRF-Chem · MUSICA · CAMx</div>
+            <div class="pipe-item"><div class="pipe-dot pink"></div> Formato GRADS · netCDF</div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="pipeline-block" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 0;">
-      <div class="pipeline-card">
-        <div class="card-phase cyan">Fase 4</div>
-        <div class="card-title">Validação</div>
-        <div class="card-desc">Comparação com dados de monitoramento da qualidade do ar, túneis, e estudos anteriores. Ajuste iterativo dos fatores.</div>
-        <div class="card-items">
-          <div class="card-item"><div class="card-item-dot cyan"></div> Dados de estações</div>
-          <div class="card-item"><div class="card-item-dot cyan"></div> Campanhas de túnel</div>
-          <div class="card-item"><div class="card-item-dot cyan"></div> Benchmarking</div>
-        </div>
-      </div>
-
-      <div class="pipeline-card">
-        <div class="card-phase purple">Fase 5</div>
-        <div class="card-title">Modelagem</div>
-        <div class="card-desc">Exportação para modelos de qualidade do ar (WRF-Chem, MUSICA) via eixport e EmissV. Cenários de curto e longo prazo.</div>
-        <div class="card-items">
-          <div class="card-item"><div class="card-item-dot purple"></div> WRF-Chem · MUSICA · CAMx</div>
-          <div class="card-item"><div class="card-item-dot purple"></div> Formato GRADS · netCDF</div>
-        </div>
-      </div>
-
-      <div class="pipeline-card">
-        <div class="card-phase pink">Fase 6</div>
-        <div class="card-title">Cenários</div>
-        <div class="card-desc">Simulação de políticas públicas: renovação de frota, etanol vs gasolina, restrições veiculares, eletrificação, Zonas de Baixa Emissão.</div>
-        <div class="card-items">
-          <div class="card-item"><div class="card-item-dot pink"></div> PROCONVE · Renovação</div>
-          <div class="card-item"><div class="card-item-dot pink"></div> Eletrificação · Biocombustíveis</div>
+        <div class="pipe-card">
+          <div class="pipe-phase orange">Fase 6</div>
+          <div class="pipe-title">Cenários</div>
+          <div class="pipe-desc">Simulação de políticas: renovação, biocombustíveis, Zonas de Baixa Emissão.</div>
+          <div class="pipe-items">
+            <div class="pipe-item"><div class="pipe-dot orange"></div> PROCONVE · Eletrificação</div>
+            <div class="pipe-item"><div class="pipe-dot orange"></div> Pedágio urbano · Rodízio</div>
+          </div>
         </div>
       </div>
     </div>
@@ -478,63 +626,68 @@ body {
       <div class="footer-left">ibarraespinosa.github.io</div>
       <div class="footer-right">
         <span>VEIN + eixport + EmissV</span>
-        <span>Ecosystema atmoschem</span>
-        <span class="page-indicator">02 / 03</span>
+        <span>ecossistema atmoschem</span>
+        <span class="page-indicator">02 / 04</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ====== SLIDE 3: ENTREGÁVEIS / VALOR PARA CIDADE ====== -->
-<div class="slide">
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
+<!-- ================================================================ -->
+<!-- SLIDE 3 — ENTREGÁVEIS -->
+<!-- ================================================================ -->
+<div class="slide slide-bg-3">
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+
   <div class="slide-content">
-    <div class="hero-header">
-      <div class="hero-logo">V</div>
-      <span class="hero-title">Resultados</span>
-      <span class="hero-badge">O Que a Cidade Recebe</span>
+    <div class="slide-header">
+      <div class="header-left">
+        <img class="header-logo" src="https://github.com/atmoschem/vein/raw/master/man/figures/logo.png" alt="VEIN">
+        <span class="header-tagline">Resultados</span>
+      </div>
+      <span class="header-badge">O Que a Cidade Recebe</span>
     </div>
 
-    <div class="main-headline" style="font-size:36px; margin-top:0;">
-      Dados, ferramentas e capacidade técnica
+    <div class="main-headline smaller">
+      Dados, ferramentas e capacidade técnica instalada
     </div>
 
-    <div class="benefits-grid">
+    <div class="benefits-wrap">
       <div class="benefit-card">
-        <div class="benefit-icon-big blue">📋</div>
+        <div class="benefit-icon-box blue">📋</div>
         <div class="benefit-title-card">Inventário Completo</div>
         <div class="benefit-desc-card">
-          Base de emissões veiculares com resolução de via e horária. CO, NOx, HC, PM₂.₅, PM₁₀, CO₂ — totais municipais e por bairro.
+          Base de emissões veiculares com resolução de via e horária. Todos os poluentes regulamentados — CO, NOx, HC, PM₂.₅, PM₁₀, CO₂.
         </div>
-        <div class="benefit-metric">Modelo replicável anualmente</div>
+        <div class="benefit-footer">Modelo replicável anualmente</div>
       </div>
 
       <div class="benefit-card">
-        <div class="benefit-icon-big green">🗺</div>
+        <div class="benefit-icon-box green">🗺️</div>
         <div class="benefit-title-card">Dashboard Interativo</div>
         <div class="benefit-desc-card">
-          Mapas de calor de emissões, séries temporais, comparação entre cenários. Visualização acessível para tomadores de decisão.
+          Mapas de calor de emissões, séries temporais, comparação entre cenários. Visualização direta para tomadores de decisão.
         </div>
-        <div class="benefit-metric">Dados abertos · formato padronizado</div>
+        <div class="benefit-footer">Dados abertos · formato padronizado</div>
       </div>
 
       <div class="benefit-card">
-        <div class="benefit-icon-big amber">🎯</div>
+        <div class="benefit-icon-box amber">🎯</div>
         <div class="benefit-title-card">Cenários de Política</div>
         <div class="benefit-desc-card">
-          Avaliação quantitativa de intervenções: expansão do etanol, renovação da frota, pedágio urbano, Zona de Baixa Emissão, eletrificação de táxis e ônibus.
+          Avaliação quantitativa de intervenções: expansão do etanol, renovação da frota, pedágio urbano, ZBE, eletrificação de táxis e ônibus.
         </div>
-        <div class="benefit-metric">Base para tomada de decisão</div>
+        <div class="benefit-footer">Base para tomada de decisão</div>
       </div>
 
       <div class="benefit-card">
-        <div class="benefit-icon-big cyan">👨‍🔬</div>
+        <div class="benefit-icon-box cyan">👨‍🔬</div>
         <div class="benefit-title-card">Capacitação Técnica</div>
         <div class="benefit-desc-card">
-          Treinamento da equipe municipal no uso do VEIN. Curso presencial/remoto, material didático, suporte contínuo. Autonomia para atualizações futuras.
+          Treinamento da equipe municipal no uso do VEIN. Curso presencial ou remoto, material didático, suporte contínuo. Autonomia para atualizações.
         </div>
-        <div class="benefit-metric">Curso + suporte técnico</div>
+        <div class="benefit-footer">Curso + suporte técnico</div>
       </div>
     </div>
 
@@ -543,7 +696,148 @@ body {
       <div class="footer-right">
         <span>Metodologia publicada · Open source</span>
         <span>Validado internacionalmente</span>
-        <span class="page-indicator">03 / 03</span>
+        <span class="page-indicator">03 / 04</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- SLIDE 4 — PUBLICAÇÕES -->
+<!-- ================================================================ -->
+<div class="slide slide-bg-4">
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+
+  <div class="slide-content">
+    <div class="slide-header">
+      <div class="header-left">
+        <img class="header-logo" src="https://github.com/atmoschem/vein/raw/master/man/figures/logo.png" alt="VEIN">
+        <span class="header-tagline">Publicações</span>
+      </div>
+      <span class="header-badge">50+ Artigos</span>
+    </div>
+
+    <div class="main-headline smaller">
+      Pesquisa publicada usando o VEIN
+    </div>
+
+    <div class="pub-grid">
+      <div class="pub-entry">
+        <div class="pub-num">01</div>
+        <div class="pub-body">
+          <div class="pub-venue">Geosci. Model Dev. (2018)</div>
+          <div class="pub-title">VEIN v0.2.2: an R package for bottom–up vehicular emissions inventories</div>
+          <div class="pub-authors">Ibarra-Espinosa, Ynoue, O'Sullivan, Pebesma, Andrade, Osses</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">02</div>
+        <div class="pub-body">
+          <div class="pub-venue">J. Open Source Softw. (2018)</div>
+          <div class="pub-title">eixport: An R package to export emissions to atmospheric models</div>
+          <div class="pub-authors">Ibarra-Espinosa, Schuch, Dias de Freitas</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">03</div>
+        <div class="pub-body">
+          <div class="pub-venue">J. Open Source Softw. (2018)</div>
+          <div class="pub-title">EmissV: an R package to create vehicular and other emissions for air quality models</div>
+          <div class="pub-authors">Schuch, Ibarra-Espinosa, Dias de Freitas</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">04</div>
+        <div class="pub-body">
+          <div class="pub-venue">Atmos. Environ. (2020)</div>
+          <div class="pub-title">High spatial and temporal resolution vehicular emissions in south-east Brazil with GPS and travel demand data</div>
+          <div class="pub-authors">Ibarra-Espinosa, Ynoue, Ropkins, Zhang, de Freitas</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">05</div>
+        <div class="pub-body">
+          <div class="pub-venue">Atmos. Environ. (2021)</div>
+          <div class="pub-title">Comprehensive spatial and temporal vehicular emissions for northeast China</div>
+          <div class="pub-authors">Ibarra-Espinosa, Zhang, Xiu, Gao, Wang, et al.</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">06</div>
+        <div class="pub-body">
+          <div class="pub-venue">CASAP (2021)</div>
+          <div class="pub-title">Spatial and temporal characterization of vehicular emissions in Ecuador using VEIN</div>
+          <div class="pub-authors">Ibarra-Espinosa, Mera, Rosero, Díaz</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">07</div>
+        <div class="pub-body">
+          <div class="pub-venue">Front. Sustain. Cities (2022)</div>
+          <div class="pub-title">Changes in bottom-up vehicular emissions inventory during COVID-19 lockdown in São Paulo</div>
+          <div class="pub-authors">Ibarra-Espinosa, Rehbein, Dias de Freitas, Martins, Andrade, Landulfo</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">08</div>
+        <div class="pub-body">
+          <div class="pub-venue">Atmosphere (2022)</div>
+          <div class="pub-title">Effects of Evaporative Emissions Control on Ozone Concentrations in Brazil</div>
+          <div class="pub-authors">Ibarra-Espinosa, Freitas, Andrade, Landulfo</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">09</div>
+        <div class="pub-body">
+          <div class="pub-venue">Geosci. Model Dev. (2021)</div>
+          <div class="pub-title">Simulation of O₃ and NOₓ in street canyons with VEIN and MUNICH</div>
+          <div class="pub-authors">Gavidia-Calderón, Ibarra-Espinosa, Kim, Zhang, Andrade</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">10</div>
+        <div class="pub-body">
+          <div class="pub-venue">Environ. Sci. Technol. (2026)</div>
+          <div class="pub-title">A Century of Vehicular Emissions in Brazil: Impacts of Unique Fuel Mix on Air Quality</div>
+          <div class="pub-authors">Ibarra-Espinosa, Freitas, Gaubert, Lichtig, et al.</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">11</div>
+        <div class="pub-body">
+          <div class="pub-venue">Atmosphere (2026)</div>
+          <div class="pub-title">Quantifying the Impact of High Emitters: Ecuador I/M Program</div>
+          <div class="pub-authors">Ibarra-Espinosa, Mera, Ropkins, Mantovani</div>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-num">12</div>
+        <div class="pub-body">
+          <div class="pub-venue">Environ. Technol. (2025)</div>
+          <div class="pub-title">Improving spatial disaggregation of vehicular emission inventories</div>
+          <div class="pub-authors">Meotti, Ibarra-Espinosa, Hoinaski</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Google Scholar: 1.544 citações · H-index 24</div>
+      <div class="footer-right">
+        <span>44+ conferências</span>
+        <span>3 livros/capítulos</span>
+        <span class="page-indicator">04 / 04</span>
       </div>
     </div>
   </div>
