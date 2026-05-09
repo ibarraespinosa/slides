@@ -463,6 +463,39 @@ body {
   border-radius: 2px;
 }
 
+/* ---- GIF SLIDE ---- */
+.gif-slide-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.gif-slide-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.85;
+}
+.gif-slide-label {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 13px;
+  color: #64748b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: rgba(7,7,13,0.6);
+  padding: 8px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(99,102,241,0.1);
+}
+
 @media (max-width: 1240px) {
   .slide { width: 100%; height: auto; min-height: 675px; }
 }
@@ -526,7 +559,7 @@ body {
       <div class="footer-right">
         <span>Metodologia: GMD 2018</span>
         <span>DOI: 10.5194/gmd-11-2209-2018</span>
-        <span class="page-indicator">01 / 04</span>
+        <span class="page-indicator">01 / 05</span>
       </div>
     </div>
   </div>
@@ -627,7 +660,7 @@ body {
       <div class="footer-right">
         <span>VEIN + eixport + EmissV</span>
         <span>ecossistema atmoschem</span>
-        <span class="page-indicator">02 / 04</span>
+        <span class="page-indicator">02 / 05</span>
       </div>
     </div>
   </div>
@@ -696,7 +729,7 @@ body {
       <div class="footer-right">
         <span>Metodologia publicada · Open source</span>
         <span>Validado internacionalmente</span>
-        <span class="page-indicator">03 / 04</span>
+        <span class="page-indicator">03 / 05</span>
       </div>
     </div>
   </div>
@@ -837,8 +870,30 @@ body {
       <div class="footer-right">
         <span>44+ conferências</span>
         <span>3 livros/capítulos</span>
-        <span class="page-indicator">04 / 04</span>
+        <span class="page-indicator">04 / 05</span>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- SLIDE 5 — GIF FULL -->
+<!-- ================================================================ -->
+<div class="slide slide-bg-2">
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+
+  <div class="gif-slide-bg">
+    <img src="https://user-images.githubusercontent.com/27447280/234115392-b1c891ff-474d-40a3-b9a7-e816ded9bc70.gif" alt="VEIN animation">
+  </div>
+
+  <div class="gif-slide-label">Inventário de Emissões · Resolução de Via</div>
+
+  <div class="slide-footer" style="position:absolute; bottom:20px; left:55px; right:55px; z-index:3; border-top-color: rgba(99,102,241,0.05);">
+    <div class="footer-left">VEIN · Bottom-Up Emissions</div>
+    <div class="footer-right">
+      <span>Resolução espacial e temporal</span>
+      <span class="page-indicator">05 / 05</span>
     </div>
   </div>
 </div>
